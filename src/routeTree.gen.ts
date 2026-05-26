@@ -9,38 +9,210 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedSessionsRouteImport } from './routes/_authenticated/sessions'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedJoinSessionRouteImport } from './routes/_authenticated/join-session'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCreateSessionRouteImport } from './routes/_authenticated/create-session'
+import { Route as AuthenticatedActivityLogsRouteImport } from './routes/_authenticated/activity-logs'
+import { Route as AuthenticatedVersionHistoryDocumentIdRouteImport } from './routes/_authenticated/version-history.$documentId'
+import { Route as AuthenticatedEditorSessionIdRouteImport } from './routes/_authenticated/editor.$sessionId'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedSessionsRoute = AuthenticatedSessionsRouteImport.update({
+  id: '/sessions',
+  path: '/sessions',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedJoinSessionRoute =
+  AuthenticatedJoinSessionRouteImport.update({
+    id: '/join-session',
+    path: '/join-session',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedCreateSessionRoute =
+  AuthenticatedCreateSessionRouteImport.update({
+    id: '/create-session',
+    path: '/create-session',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedActivityLogsRoute =
+  AuthenticatedActivityLogsRouteImport.update({
+    id: '/activity-logs',
+    path: '/activity-logs',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedVersionHistoryDocumentIdRoute =
+  AuthenticatedVersionHistoryDocumentIdRouteImport.update({
+    id: '/version-history/$documentId',
+    path: '/version-history/$documentId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedEditorSessionIdRoute =
+  AuthenticatedEditorSessionIdRouteImport.update({
+    id: '/editor/$sessionId',
+    path: '/editor/$sessionId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/activity-logs': typeof AuthenticatedActivityLogsRoute
+  '/create-session': typeof AuthenticatedCreateSessionRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/join-session': typeof AuthenticatedJoinSessionRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/sessions': typeof AuthenticatedSessionsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
+  '/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/activity-logs': typeof AuthenticatedActivityLogsRoute
+  '/create-session': typeof AuthenticatedCreateSessionRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/join-session': typeof AuthenticatedJoinSessionRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/sessions': typeof AuthenticatedSessionsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
+  '/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/_authenticated/activity-logs': typeof AuthenticatedActivityLogsRoute
+  '/_authenticated/create-session': typeof AuthenticatedCreateSessionRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/join-session': typeof AuthenticatedJoinSessionRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/sessions': typeof AuthenticatedSessionsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
+  '/_authenticated/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/activity-logs'
+    | '/create-session'
+    | '/dashboard'
+    | '/join-session'
+    | '/profile'
+    | '/sessions'
+    | '/settings'
+    | '/editor/$sessionId'
+    | '/version-history/$documentId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/activity-logs'
+    | '/create-session'
+    | '/dashboard'
+    | '/join-session'
+    | '/profile'
+    | '/sessions'
+    | '/settings'
+    | '/editor/$sessionId'
+    | '/version-history/$documentId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/login'
+    | '/register'
+    | '/_authenticated/activity-logs'
+    | '/_authenticated/create-session'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/join-session'
+    | '/_authenticated/profile'
+    | '/_authenticated/sessions'
+    | '/_authenticated/settings'
+    | '/_authenticated/editor/$sessionId'
+    | '/_authenticated/version-history/$documentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +220,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/sessions': {
+      id: '/_authenticated/sessions'
+      path: '/sessions'
+      fullPath: '/sessions'
+      preLoaderRoute: typeof AuthenticatedSessionsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/join-session': {
+      id: '/_authenticated/join-session'
+      path: '/join-session'
+      fullPath: '/join-session'
+      preLoaderRoute: typeof AuthenticatedJoinSessionRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/create-session': {
+      id: '/_authenticated/create-session'
+      path: '/create-session'
+      fullPath: '/create-session'
+      preLoaderRoute: typeof AuthenticatedCreateSessionRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/activity-logs': {
+      id: '/_authenticated/activity-logs'
+      path: '/activity-logs'
+      fullPath: '/activity-logs'
+      preLoaderRoute: typeof AuthenticatedActivityLogsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/version-history/$documentId': {
+      id: '/_authenticated/version-history/$documentId'
+      path: '/version-history/$documentId'
+      fullPath: '/version-history/$documentId'
+      preLoaderRoute: typeof AuthenticatedVersionHistoryDocumentIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/editor/$sessionId': {
+      id: '/_authenticated/editor/$sessionId'
+      path: '/editor/$sessionId'
+      fullPath: '/editor/$sessionId'
+      preLoaderRoute: typeof AuthenticatedEditorSessionIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedActivityLogsRoute: typeof AuthenticatedActivityLogsRoute
+  AuthenticatedCreateSessionRoute: typeof AuthenticatedCreateSessionRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedJoinSessionRoute: typeof AuthenticatedJoinSessionRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSessionsRoute: typeof AuthenticatedSessionsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedEditorSessionIdRoute: typeof AuthenticatedEditorSessionIdRoute
+  AuthenticatedVersionHistoryDocumentIdRoute: typeof AuthenticatedVersionHistoryDocumentIdRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedActivityLogsRoute: AuthenticatedActivityLogsRoute,
+  AuthenticatedCreateSessionRoute: AuthenticatedCreateSessionRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedJoinSessionRoute: AuthenticatedJoinSessionRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedSessionsRoute: AuthenticatedSessionsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedEditorSessionIdRoute: AuthenticatedEditorSessionIdRoute,
+  AuthenticatedVersionHistoryDocumentIdRoute:
+    AuthenticatedVersionHistoryDocumentIdRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
