@@ -21,6 +21,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCreateSessionRouteImport } from './routes/_authenticated/create-session'
 import { Route as AuthenticatedActivityLogsRouteImport } from './routes/_authenticated/activity-logs'
 import { Route as AuthenticatedVersionHistoryDocumentIdRouteImport } from './routes/_authenticated/version-history.$documentId'
+import { Route as AuthenticatedEditorSessionIdRouteImport } from './routes/_authenticated/editor.$sessionId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -85,6 +86,12 @@ const AuthenticatedVersionHistoryDocumentIdRoute =
     path: '/version-history/$documentId',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedEditorSessionIdRoute =
+  AuthenticatedEditorSessionIdRouteImport.update({
+    id: '/editor/$sessionId',
+    path: '/editor/$sessionId',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/sessions': typeof AuthenticatedSessionsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
   '/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRoutesByTo {
@@ -110,6 +118,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/sessions': typeof AuthenticatedSessionsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
   '/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRoutesById {
@@ -125,6 +134,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/sessions': typeof AuthenticatedSessionsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/editor/$sessionId': typeof AuthenticatedEditorSessionIdRoute
   '/_authenticated/version-history/$documentId': typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/sessions'
     | '/settings'
+    | '/editor/$sessionId'
     | '/version-history/$documentId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/sessions'
     | '/settings'
+    | '/editor/$sessionId'
     | '/version-history/$documentId'
   id:
     | '__root__'
@@ -167,6 +179,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/sessions'
     | '/_authenticated/settings'
+    | '/_authenticated/editor/$sessionId'
     | '/_authenticated/version-history/$documentId'
   fileRoutesById: FileRoutesById
 }
@@ -263,6 +276,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedVersionHistoryDocumentIdRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/editor/$sessionId': {
+      id: '/_authenticated/editor/$sessionId'
+      path: '/editor/$sessionId'
+      fullPath: '/editor/$sessionId'
+      preLoaderRoute: typeof AuthenticatedEditorSessionIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -274,6 +294,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSessionsRoute: typeof AuthenticatedSessionsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedEditorSessionIdRoute: typeof AuthenticatedEditorSessionIdRoute
   AuthenticatedVersionHistoryDocumentIdRoute: typeof AuthenticatedVersionHistoryDocumentIdRoute
 }
 
@@ -285,6 +306,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSessionsRoute: AuthenticatedSessionsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedEditorSessionIdRoute: AuthenticatedEditorSessionIdRoute,
   AuthenticatedVersionHistoryDocumentIdRoute:
     AuthenticatedVersionHistoryDocumentIdRoute,
 }
