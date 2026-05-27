@@ -188,10 +188,16 @@ function EditorPage() {
           },
         ]);
         pushActivity(`Conflict with ${payload.username} on line ${payload.line}`);
+        // Validate payload.user_id against tracked presence state before
+        // attributing conflict to another user. Broadcast payloads are not
+        // server-authenticated, so a malicious client could otherwise frame
+        // any user. If not present, omit user_b rather than trust the claim.
+        const presenceState = channelRef.current?.presenceState() as Record<string, Presence[]> | undefined;
+        const verifiedRemote = presenceState && presenceState[payload.user_id]?.[0];
         supabase.from("conflicts").insert({
           document_id: payload.doc_id,
           user_a: user!.id,
-          user_b: payload.user_id,
+          user_b: verifiedRemote ? payload.user_id : null,
           line_number: payload.line,
         });
         return;
